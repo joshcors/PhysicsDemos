@@ -4,10 +4,12 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <h2>Physics Simulations</h2>
-    <h3>Select Simulation</h3>
+    <h2>Physics and Math Demonstrations</h2>
+    <h3>Select demonstration</h3>
     <button onclick="window.location.href='/pendulum'">Pendulum</button>
     <button onclick="window.location.href='/schrodinger'">Schrödinger</button>
+    <button onclick="window.location.href='/n-body'">N-Body Simulation</button>
+    <button onclick="window.location.href='/mandelbrot'">Mandelbrot Set</button>
 {% endblock %}
 {% block scripts %}
     <script src="{{ url_for('static', filename='index.js') }}"></script>

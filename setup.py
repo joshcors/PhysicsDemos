@@ -5,5 +5,5 @@ setup(
     version="0.1",
     description="Repository for web-based physics simulations",
     package_dir={"": "src"},
-    packages=["web", "schrodinger", "pendulum"]
+    packages=["web", "schrodinger", "pendulum", "mandelbrot"]
 )
