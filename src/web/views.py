@@ -120,11 +120,11 @@ def add_axes(image, real_lower, real_upper, imag_lower, imag_upper, x_res, y_res
 
     for i, real in zip(x_ints, x_floats):
         draw.line([(i, 0), (i, y_res)], fill="white", width=1)
-        draw.text((i, 0), "{:.2f}".format(real), fill="white")
+        draw.text((i, 0), "{:.2e}".format(real), fill="white")
 
     for i, imag in zip(y_ints, y_floats):
         draw.line([(0, i), (x_res, i)], fill="white", width=1)
-        draw.text((0, i), "{:.2f}".format(imag), fill="white")
+        draw.text((0, i), "{:.2e}".format(imag), fill="white")
 
 @socketio.on("render_mandelbrot")
 def render_mandelbrot(data):
