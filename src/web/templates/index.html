@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %} Physics Simulations {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h2>Physics Simulations</h2>
+    <h3>Select Simulation</h3>
+    <button onclick="window.location.href='/pendulum'">Pendulum</button>
+    <button onclick="window.location.href='/schrodinger'">Schrödinger</button>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}

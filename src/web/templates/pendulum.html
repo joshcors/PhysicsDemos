@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %} Physics Simulations {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h2>Pendulum Simulation</h2>
+    <button id="pause-play">Play</button>
+    <br>
+    <div>
+        <label for="n_pendula">Number of Pendula:</label>
+        <input type="number" id="n_pendula" value="1" min="1" max="10" style="width: 10%">
+        <label for="d_theta_1">d_theta_1:</label>
+        <input type="number" id="d_theta_1" value="0.1" step="0.01" style="width: 10%">
+        <label for="d_theta_2">d_theta_2:</label>
+        <input type="number" id="d_theta_2" value="0.1" step="0.01" style="width: 10%">
+    </div>
+    <div>
+    </div>
+    <div>
+        <label for="theta_1_slider">Theta 1 (in degrees):</label>
+        <input type="range" id="theta_1_slider" min="0" max="360" value="0" style="width: 30%">
+        <span id="theta_1_value">0</span><span>°</span>
+    </div>
+    <br>
+    <div>
+        <label for="theta_2_slider">Theta 2 (in degrees):</label>
+        <input type="range" id="theta_2_slider" min="0" max="360" value="0" style="width: 30%">
+        <span id="theta_2_value">0</span><span>°</span>
+        <div id="spinner-container" style="position: absolute; width: 500px; height: 500px; display: flex; justify-content: center; align-items: center;">
+            <div class="spinner"></div>
+            <br>
+            <p>Loading...</p>
+        </div>
+    </div>
+    <br>
+    <div>
+        <label for="draw-trail">Draw Trail</label>
+        <input type="checkbox" id="draw-trail" checked>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='pendulum.js') }}" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+{% endblock %}
