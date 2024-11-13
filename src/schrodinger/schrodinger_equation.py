@@ -7,8 +7,6 @@ import cupyx.scipy.sparse.linalg as linalg
 from progress.bar import Bar
 from scipy.sparse import lil_matrix
 
-from mayavi import mlab
-
 class SchrodingerEquation:
 
     H_BAR = 1.05457e-34
@@ -302,36 +300,32 @@ if __name__=='__main__':
 
     x = cp.linspace(-X / 2, X / 2, M)
     y = cp.linspace(-Y / 2, Y / 2, N)
-    # z = cp.linspace(-Z / 2, Z / 2, L)
+    z = cp.linspace(-Z / 2, Z / 2, L)
 
-    y, x = cp.meshgrid(y, x, indexing='ij')
-    # z, y, x = cp.meshgrid(z, y, x, indexing='ij')
+    z, y, x = cp.meshgrid(z, y, x, indexing='ij')
 
-    r = cp.sqrt(x**2 + y**2)
-    # r1 = cp.sqrt((x - 1.5*Hr)**2 + (y - 1.5*Hr)**2 + z**2)
-    # r2 = cp.sqrt((x + 1.5*Hr)**2 + (y - 1.5*Hr)**2 + z**2)
-    # r3 = cp.sqrt((x - 1.5*Hr)**2 + (y + 1.5*Hr)**2 + z**2)
-    # r4 = cp.sqrt((x + 1.5*Hr)**2 + (y + 1.5*Hr)**2 + z**2)
+    # 4 well example
+    r1 = cp.sqrt((x - 1.5*Hr)**2 + (y - 1.5*Hr)**2 + z**2)
+    r2 = cp.sqrt((x + 1.5*Hr)**2 + (y - 1.5*Hr)**2 + z**2)
+    r3 = cp.sqrt((x - 1.5*Hr)**2 + (y + 1.5*Hr)**2 + z**2)
+    r4 = cp.sqrt((x + 1.5*Hr)**2 + (y + 1.5*Hr)**2 + z**2)
 
-    V0 = -q**2 / (4 * np.pi * epsilon_0 * r)
-    # V1 = -q**2 / (4 * np.pi * epsilon_0 * r1)
-    # V2 = -q**2 / (4 * np.pi * epsilon_0 * r2)
-    # V3 = -q**2 / (4 * np.pi * epsilon_0 * r3)
-    # V4 = -q**2 / (4 * np.pi * epsilon_0 * r4)
+    V1 = -q**2 / (4 * np.pi * epsilon_0 * r1)
+    V2 = -q**2 / (4 * np.pi * epsilon_0 * r2)
+    V3 = -q**2 / (4 * np.pi * epsilon_0 * r3)
+    V4 = -q**2 / (4 * np.pi * epsilon_0 * r4)
 
-    V = V0
-    # V = V1
-    # V += V2
-    # V += V3
-    # V += V4
+    V = V1
+    V += V2
+    V += V3
+    V += V4
 
-    # V -= V.max()
+    V -= V.max()
 
     m = 0.511e6
 
     se = SchrodingerEquation(M, N, L, V, me, X, Y, Z, BC='periodic')
 
-    # se.populate_matrix()
     se.populate_matrix_2d_efficient()
     
     print("Calculating Eigensolutions")
@@ -342,8 +336,3 @@ if __name__=='__main__':
     for i in range(20):
         plt.imshow(phis[i])
         plt.show()
-        # mlab.figure(1, bgcolor=(1,1,1))
-        # mlab.contour3d(phis[i])
-        # mlab.show()
-    # import ipdb; ipdb.set_trace()
-
